@@ -1,4 +1,4 @@
-public class PriorityQueue{
+public class PriorityQueue {
 
 	final int MAX_N = 1000;
 	private double[] times = new double[MAX_N];
@@ -6,16 +6,16 @@ public class PriorityQueue{
 	private double[] arrivalTimes = new double[MAX_N];
 	private int lastIndex;
 
-	public PriorityQueue(){
+	public PriorityQueue() {
 		lastIndex = 0;
-		for(int i = 0; i < MAX_N; i++){
+		for(int i = 0; i < MAX_N; i++) {
 			times[i] = Double.MAX_VALUE;
 			tameia[i] = Integer.MAX_VALUE;
 			arrivalTimes[i] = Double.MAX_VALUE;
 		}
 	}
 
-	public void add(double time, int tameioIndex, double arrivalTime){
+	public void add(double time, int tameioIndex, double arrivalTime) {
 		int index = lastIndex++;
 		times[index] = time;
 		tameia[index] = tameioIndex;
@@ -39,11 +39,10 @@ public class PriorityQueue{
 			tameia[(index-1)/2] = tempInt;
 
 			index = (index-1)/2;
-
 		}
 	}
 
-	public void pop(){
+	public void pop() {
 		int index = 0;
 		double tempDouble;
 		int tempInt;
@@ -66,7 +65,7 @@ public class PriorityQueue{
 		tameia[lastIndex] = Integer.MAX_VALUE;
 		arrivalTimes[lastIndex] = Double.MAX_VALUE;
 
-		while(Math.min(times[index*2+1], times[index*2+2]) < times[index]){
+		while(Math.min(times[index*2+1], times[index*2+2]) < times[index]) {
 			if(times[index*2+1] < times[index*2+2]){
 				tempDouble = times[index*2+1];
 				times[index*2+1] = times[index];
@@ -100,16 +99,15 @@ public class PriorityQueue{
 		}
 	}
 
-	public double getTop(){
+	public double getTop() {
 		return times[0];
 	}
 
-	public int getTopTameio(){
+	public int getTopTameio() {
 		return tameia[0];
 	}
 
-	public double getTopArrivalTime(){
+	public double getTopArrivalTime() {
 		return arrivalTimes[0];
 	}
 }
-

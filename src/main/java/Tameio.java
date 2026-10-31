@@ -1,4 +1,4 @@
-public class Tameio{
+public class Tameio {
 
 	private double l; //To Lamda dinetai se amaxia ana lepto
 	private double constantTime;
@@ -11,7 +11,7 @@ public class Tameio{
 
 	Queue allArrivalTimes = new Queue();
 
-	public Tameio(double constantTime, double avgTime, double synolikosXronos){
+	public Tameio(double constantTime, double avgTime, double synolikosXronos) {
 		this.constantTime = constantTime;
 		this.avgTime = avgTime;
 		l = 60/(avgTime - constantTime);
@@ -22,31 +22,31 @@ public class Tameio{
 		this.synolikosXronos = synolikosXronos;
 	}
 
-	public void setLamda(double l){
+	public void setLamda(double l) {
 		this.l = l;
 		poisson.setLamda(l);
 	}
 
-	public double getLamda(){
+	public double getLamda() {
 		return l;
 	}
 
-	public double getServiceTime(){
+	public double getServiceTime() {
 		return constantTime + poisson.waitTime()*60; //epistrephontai deuterolepta
 	}
 
-	public int getQueue(){
+	public int getQueue() {
 		return queue;
 	}
 
-	public void addCar(double time){
+	public void addCar(double time) {
 		allArrivalTimes.add(time);
 		averageQueue += (time - lastTime)/synolikosXronos * queue;
 		queue++;
 		lastTime = time;
 	}
 
-	public double removeCar(double time){
+	public double removeCar(double time) {
 		double waitTime = time - allArrivalTimes.getFirst();
 		allArrivalTimes.remove();
 		averageQueue += (time - lastTime)/synolikosXronos * queue;
@@ -55,7 +55,7 @@ public class Tameio{
 		return waitTime;
 	}
 
-	public double getAverageQueue(){
+	public double getAverageQueue() {
 		return averageQueue;
 	}
 

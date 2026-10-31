@@ -1,17 +1,16 @@
 import java.util.Random;
 
-public class Poisson{
+public class Poisson {
 
 	private double l; //O rithmos tis diadikasias poisson
 	private Random random = new Random(); //H tyxaia metavliti tis diadikasias
 
-	public Poisson(double l){ //O constructor
+	public Poisson(double l) { //O constructor
 		this.l = l;
 	}
 
-	public double waitTime(){
+	public double waitTime() {
 		double waitTime;
-
 		double P = random.nextDouble(); //H tyxaia pithanotita tou xronou anamonis gia epomeni epityxia
 
 		/*
@@ -22,13 +21,12 @@ public class Poisson{
 			x = -ln(1 - P)/l
 		*/
 
-		waitTime = - Math.log(1-P)/l; //O xronos anamonis pou antistoixei stin tyxaia pithanotita P
+		waitTime = - Math.log(1-P) / l; //O xronos anamonis pou antistoixei stin tyxaia pithanotita P
 
 		return waitTime;
 	}
 
-	public void setLamda(double l){
+	public void setLamda(double l) {
 		this.l = l;
 	}
-
 }

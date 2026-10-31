@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Simulation{
+public class Simulation {
 
 	private CarGenerator cars;
 	private Tameio[] tameia;
@@ -8,7 +8,7 @@ public class Simulation{
 	private double synolikosXronos;
 	private boolean rand;
 
-	public Simulation(int N, double[] constantTime, double[] avgTime, double lamdaCars, double synolikosXronos, boolean rand){
+	public Simulation(int N, double[] constantTime, double[] avgTime, double lamdaCars, double synolikosXronos, boolean rand) {
 		this.N = N;
 		tameia = new Tameio[N];
 		for(int i = 0; i < N; i++){
@@ -19,7 +19,7 @@ public class Simulation{
 		this.rand = rand;
 	}
 
-	public void runSimulation(){
+	public void runSimulation() {
 
 		double averageXronosAnamonis = 0;
 		int carsTotal = 0;
@@ -32,10 +32,10 @@ public class Simulation{
 		time = nextCarArrival;
 		carsTotal++;
 		int tameioChoice;
-		if(rand == true){
+		if(rand == true) {
 			tameioChoice = ChooseTameioRandom();
 		}
-		else{
+		else {
 			tameioChoice = ChooseTameio();
 		}
 		double serviceTime = time + tameia[tameioChoice].getServiceTime();
@@ -46,27 +46,27 @@ public class Simulation{
 
 		int serviceTameio;
 
-		while(time < synolikosXronos){ //posa deyterolepta tha trexei
-			if(nextCarArrival < serviceTimes.getTop()){
+		while(time < synolikosXronos) { //posa deyterolepta tha trexei
+			if(nextCarArrival < serviceTimes.getTop()) {
 				time = nextCarArrival;
 				carsTotal++;
-				if(rand == true){
+				if(rand == true) {
 					tameioChoice = ChooseTameioRandom();
 				}
-				else{
+				else {
 					tameioChoice = ChooseTameio();
 				}
 
 				tameia[tameioChoice].addCar(time);
 
-				if(tameia[tameioChoice].getQueue() == 1){
+				if(tameia[tameioChoice].getQueue() == 1) {
 					serviceTime = time + tameia[tameioChoice].getServiceTime();
 					serviceTimes.add(serviceTime, tameioChoice, time);
 				}
 
 				nextCarArrival = time + cars.getNextCar();
 			}
-			else{
+			else {
 				time = serviceTimes.getTop();
 				serviceTameio = serviceTimes.getTopTameio();
 				double arrivalTime = serviceTimes.getTopArrivalTime();
@@ -74,7 +74,7 @@ public class Simulation{
 
 				averageXronosAnamonis += tameia[serviceTameio].removeCar(time);
 
-				if(tameia[serviceTameio].getQueue() > 0){
+				if(tameia[serviceTameio].getQueue() > 0) {
 					serviceTime = time + tameia[serviceTameio].getServiceTime();
 					serviceTimes.add(serviceTime, serviceTameio, time);
 				}
@@ -85,7 +85,7 @@ public class Simulation{
 
 		System.out.println("APOTELESMATA");
 
-		for(int i = 0; i < N; i++){
+		for(int i = 0; i < N; i++) {
 			System.out.println("Tameio " + i + " : " + tameia[i].getAverageQueue());
 		}
 
@@ -96,24 +96,24 @@ public class Simulation{
 
 	}
 
-	private int ChooseTameio(){
+	private int ChooseTameio() {
 		int min = Integer.MAX_VALUE;
 		int counter = 0;
 		int[] minTameio = new int[N];
 
 		for(int i = 0; i < N; i++){
-			if(tameia[i].getQueue() < min){
+			if(tameia[i].getQueue() < min) {
 				min = tameia[i].getQueue();
 				counter = 1;
 				minTameio[0] = i;
 			}
-			else if(tameia[i].getQueue() == min){
+			else if(tameia[i].getQueue() == min) {
 				minTameio[counter] = i;
 				counter++;
 			}
 		}
 
-		if(counter > 1){
+		if(counter > 1) {
 			Random random = new Random();
 			int tameio = random.nextInt(counter);
 			return minTameio[tameio];
@@ -122,10 +122,10 @@ public class Simulation{
 		return minTameio[0];
 	}
 
-	private int ChooseTameioRandom(){
+	private int ChooseTameioRandom( ){
 		Random random = new Random();
 		int tameio = random.nextInt(N);
 		return tameio;
 	}
-
 }
+
